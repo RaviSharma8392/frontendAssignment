@@ -28,6 +28,7 @@ body {
   flex-direction: column;
 }
 
+/* navbar style */
 .navbar {
   background: linear-gradient(var(--primary), var(--secondary));
   padding: 1.2rem;
@@ -43,12 +44,13 @@ body {
   letter-spacing: 0.5px;
 }
 
+/* section */
 .section {
   display: flex;
   height: 100vh;
 }
 
-/* Sidebar Styles */
+/* left side Styles */
 .sidebar {
   width: 280px;
   background-color: var(--sidebar-bg);
@@ -86,7 +88,7 @@ body {
   color: white;
 }
 
-/* Drop Area */
+/* center side Styles */
 .dropArea {
   flex: 1;
   background-color: var(--dropzone-bg);
@@ -97,7 +99,7 @@ body {
   gap: 1.5rem;
 }
 
-/* Form Container */
+/* right side Styles */
 .form-container {
   width: 320px;
   background-color: var(--form-bg);
@@ -160,7 +162,6 @@ label {
   .sidebar,
   .form-container {
     width: 100%;
-    height: auto;
   }
 
   .sidebar {
@@ -176,22 +177,53 @@ label {
 
   .draggable {
     margin: 0;
-    flex: 1 1 120px;
   }
 
   .form-container {
-    order: -1;
     border-left: none;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   }
 }
 
-@media (max-width: 480px) {
-  .text-header {
-    font-size: 1.2rem;
+@media (max-width: 768px) {
+  .section {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .sidebar,
+  .form-container {
+    width: 100%;
+    height: auto;
+    padding: 1rem;
+  }
+
+  .dropArea {
+    width: 100%;
+    padding: 1rem;
+    min-height: 300px;
   }
 
   .draggable {
     flex: 1 1 100%;
+    padding: 1rem;
+    margin: 0.5rem 0;
+    font-size: 1rem;
+  }
+
+  .form-container {
+    order: 2;
+  }
+
+  .sidebar {
+    order: 1;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+
+  .dropArea {
+    order: 3;
   }
 }

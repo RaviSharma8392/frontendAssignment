@@ -14,18 +14,14 @@
       <!-- sidebar for adding element -->
       <div class="sidebar">
         <h3 class="sidebar-heading">Add Element</h3>
-        <div class="draggable" data-type="text" draggable="true">Text</div>
+        <div class="draggable" onclick="allowDrop(event)" data-type="text" draggable="true">Text</div>
         <div class="draggable" data-type="image" draggable="true">Image</div>
         <div class="draggable" data-type="button" draggable="true">Button</div>
       </div>
 
       <!-- drop area  -->
-      <div
-        class="dropArea"
-        ondragover="allowDrop(event)"
-        ondrop="drop(event)">
+          <div id="dropZone" class="dropArea" ondrop="dropFromDragEvent(event)" ondragover="allowDrop(event)" ></div>
 
-    </div>
 
       <!-- Form for editing new elements -->
       <div class="form-container">

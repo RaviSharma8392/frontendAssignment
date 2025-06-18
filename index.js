@@ -1,11 +1,17 @@
 let selectedElement = null;
+const dragBox = document.getElementById("dropZone");
 const form = document.getElementById("editForm");
 const draggableElements = document.querySelectorAll(".draggable");
 
-// Add dragstart event listeners
+// Add drag and click event listeners
 draggableElements.forEach((element) => {
   element.addEventListener("dragstart", (e) => {
     e.dataTransfer.setData("type", element.dataset.type);
+  });
+
+  element.addEventListener("click", () => {
+    const type = element.dataset.type;
+    drop(type);
   });
 });
 
@@ -14,10 +20,15 @@ const allowDrop = (e) => {
   e.preventDefault();
 };
 
-// Handle element drop
-function drop(e) {
+// For drag-and-drop
+function dropFromDragEvent(e) {
   e.preventDefault();
   const type = e.dataTransfer.getData("type");
+  drop(type);
+}
+
+// logic for both  click and drag
+const drop = (type) => {
   let newElement;
 
   if (type === "text") {
@@ -37,16 +48,15 @@ function drop(e) {
     newElement = document.createElement("button");
     newElement.textContent = "Click me";
     newElement.style.border = "5px solid #ccc";
-        newElement.style.fontSize = "20px";
-
+    newElement.style.fontSize = "20px";
     newElement.style.borderRadius = "5px";
     newElement.style.padding = "20px";
     newElement.style.backgroundColor = "green";
   }
 
   newElement.onclick = () => openEditForm(newElement);
-  e.target.appendChild(newElement);
-}
+  dragBox.appendChild(newElement);
+};
 
 // Show form to edit the clicked element
 function openEditForm(element) {
@@ -54,16 +64,16 @@ function openEditForm(element) {
   form.innerHTML = "";
 
   if (element.tagName === "DIV" || element.tagName === "BUTTON") {
+    const computedStyles = window.getComputedStyle(element);
     const commonFields = `
       <label>Text:
         <input type="text" id="editText" value="${element.textContent}" />
       </label><br/>
-    
       <label>Font Size:
-        <input type="number" id="fontSize" value="${parseInt(element.style.fontSize) || 16}" />
+        <input type="number" id="fontSize" value="${parseInt(computedStyles.fontSize) || 16}" />
       </label><br/>
       <label>Text Color:
-        <input type="color" id="color" value="${element.style.color ||' #edf2f4'}" />
+        <input type="color" id="color" value="${element.style.color || '#000000'}" />
       </label><br/>
       <label>Background Color:
         <input type="color" id="bg-color" value="${element.style.backgroundColor || '#edf2f4'}" />
@@ -94,19 +104,17 @@ function openEditForm(element) {
   };
 }
 
-// Update the selected element's content
+// Apply edits to selected element
 function applyChanges() {
   if (!selectedElement) return;
 
   if (selectedElement.tagName === "DIV" || selectedElement.tagName === "BUTTON") {
     const newText = document.getElementById("editText")?.value;
-  
     const newFontSize = document.getElementById("fontSize")?.value;
     const newBGColor = document.getElementById("bg-color")?.value;
     const newColor = document.getElementById("color")?.value;
 
     if (newText) selectedElement.textContent = newText;
-  
     if (newFontSize) selectedElement.style.fontSize = newFontSize + "px";
     if (newBGColor) selectedElement.style.backgroundColor = newBGColor;
     if (newColor) selectedElement.style.color = newColor;
