@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="index.css" />
+    <title>Drag and Drop Editor</title>
+  </head>
+  <body>
+    <nav class="navbar">
+      <h1 class="text-header" >Ravi's Drag-and-Drop Web Builder – June 2025 Project</h>
+    </nav>
+    <main class="section">
+      <!-- sidebar for adding element -->
+      <div class="sidebar">
+        <h3 class="sidebar-heading">Add Element</h3>
+        <div class="draggable" data-type="text" draggable="true">Text</div>
+        <div class="draggable" data-type="image" draggable="true">Image</div>
+        <div class="draggable" data-type="button" draggable="true">Button</div>
+      </div>
+
+      <!-- drop area  -->
+      <div
+        class="dropArea"
+        ondragover="allowDrop(event)"
+        ondrop="drop(event)">
+
+    </div>
+
+      <!-- Form for editing new elements -->
+      <div class="form-container">
+        <h3 class="form-container-heading">Edit Element</h3>
+        <form id="editForm"></form>
+      </div>
+    </main>
+
+    <script src="index.js"></script>
+  </body>
+</html>
